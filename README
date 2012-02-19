@@ -1,0 +1,13 @@
+INTRODUCTION
+
+	This script plots a map of the denied hosts from the denyhosts daemon. It first reads out the contents of the /etc/hosts.deny file, after which every IP address in this file is checked for geo location. Afterwards, a .KML file is created with the GPS coordinates of every entry. The KML file can be imported into Google Earth or http://maps.google.com.
+
+EXAMPLES
+
+	An example output can be found here; http://g.co/maps/qt3tz
+
+INSTALL
+
+	The script has been tested under Debian and Ubuntu. Clone the Git repository and run the denyhosts_map.sh script with a regular user account. The generated KML will appear in your current directory.
+
+	./denyhosts_map.sh
