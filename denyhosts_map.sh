@@ -7,8 +7,9 @@ ips=`grep -v "#" /etc/hosts.deny | tr -d " sshd:" | sort | uniq`
 COUNTER=0
 echo "Number of Denied IPs: $ipnums"
 for i in $ips; 
+do
 let COUNTER++
-do wget --quiet -O - http://freegeoip.net/xml/$i >> $workdir/$i; 
+wget --quiet -O - http://freegeoip.net/xml/$i >> $workdir/$i; 
 echo "$i completed ($COUNTER)"
 done
 printf '<?xml version="1.0" encoding="UTF-8"?> \n <kml xmlns="http://www.opengis.net/kml/2.2">\n <Folder> \n  <name>Blocked SSH hosts</name>\n   <open>1</open>\n  <Document>' >> $kml
