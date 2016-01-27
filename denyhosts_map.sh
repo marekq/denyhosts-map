@@ -3,7 +3,7 @@
 workdir=/tmp/geoip/
 kmlroot=./denyhosts.map.kml
 rm -f $workdir* || mkdir -p $workdir
-rm *.kml
+rm ./*.kml
 ips=`grep -v "#" /etc/hosts.deny | tr -d " sshd:" | sort | uniq`
 ipnums=`grep -v "#" /etc/hosts.deny | tr -d " sshd:" | sort | uniq | wc -l`
 
