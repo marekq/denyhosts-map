@@ -3,7 +3,7 @@
 workdir=/tmp/geoip/
 kmlroot=./denyhosts.map.kml
 rm -f $workdir* || mkdir -p $workdir
-rm ./*.kml
+rm *.kml
 ips=`grep -v "#" /etc/hosts.deny | tr -d " sshd:" | sort | uniq`
 ipnums=`grep -v "#" /etc/hosts.deny | tr -d " sshd:" | sort | uniq | wc -l`
 
@@ -68,7 +68,7 @@ for x in $(seq "$totfiles"); do
 			break;
 		fi
 
-		la=`egrep Latitude $FILE | tr -d "[A-z/<> "` && lo=`egrep Longitude $FILE | tr -d "[A-z/<> "` && loc=`egrep CountryName $FILE | tr -d "<.*>/" | sed s/CountryName//g` && reg=`egrep City $FILE | tr -d "<.*>/ " | sed s/City//g` && ip=`echo $FILE | tr -d "[A-z]/"` && printf "<Placemark>\n<name>$ip</name>\n<description><![CDATA[$reg, $loc]]></description>\n<Point>\n<coordinates>$lo,$la,0.0</coordinates>\n</Point>\n</Placemark>\n" >> $kml; 
+		la=`egrep Latitude $FILE | tr -d "[A-z/<> "` && lo=`egrep Longitude $FILE | tr -d "[A-z/<> "` && loc=`egrep CountryName $FILE | tr -d "<.*>/" | sed s/CountryName//g` && reg=`egrep City $FILE | tr -d "<.*>/" | sed s/City//g` && ren=`egrep regionName $FILE | tr -d "<.*>/" | sed s/RegionName//g` && ip=`echo $FILE | tr -d "[A-z]/"` && printf "<Placemark>\n<name>$ip</name>\n<description><![CDATA[$reg, $ren, $loc]]></description>\n<Point>\n<coordinates>$lo,$la,0.0</coordinates>\n</Point>\n</Placemark>\n" >> $kml; 
 		rm $FILE;
 		let rcount++;
 
